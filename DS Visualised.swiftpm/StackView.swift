@@ -24,7 +24,7 @@ struct StackView: View {
                     ScrollView(showsIndicators: false) {
                         ForEach(BookStack, id: \.self) { element in
                                         Text(element)
-                                .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .frame(width: 150, height: 50, alignment: .center)
                                             .padding()
                                             .background(Color.black)
                                             .foregroundColor(.white)
