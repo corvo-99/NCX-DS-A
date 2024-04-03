@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Stack<Element: Equatable>: Equatable {
+struct Stack<Element: Equatable>: RandomAccessCollection, MutableCollection  {
     
     private var internalStorage: [Element] = []
     
@@ -33,6 +33,20 @@ struct Stack<Element: Equatable>: Equatable {
     func peek() -> Element? {
         return self.internalStorage.last
     }
+    
+    typealias Index = Int
+    
+    var startIndex: Index { return 0 }
+    var endIndex: Index { return internalStorage.count }
+    
+    subscript(position: Index) -> Element {
+            get { return internalStorage[position] }
+            set { internalStorage[position] = newValue }
+        }
+    
+    func index(after i: Index) -> Index {
+            return internalStorage.index(after: i)
+        }
 }
 
 
