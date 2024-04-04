@@ -32,6 +32,16 @@ struct MainMenuView: View {
                         } label: {
                             Text("Tree")
                         }
+                        NavigationLink{
+                            Text("Work in progress") 
+                        } label: {
+                            Text("Hash Tables")
+                        }
+                        NavigationLink{
+                            Text("Work in progress")
+                        } label: {
+                            Text("Heaps")
+                        }
                     } header: {
                         Text("Non-Linear data structures")
                     }
