@@ -70,7 +70,6 @@ struct DequeView: View {
                     }
                 }
             }
-            .navigationTitle("Deque")
         }
     }
 }
