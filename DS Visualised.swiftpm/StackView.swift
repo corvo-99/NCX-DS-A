@@ -52,7 +52,6 @@ struct StackView: View {
                 }
             }
         }
-        .navigationTitle("Stack")
     }
 }
 

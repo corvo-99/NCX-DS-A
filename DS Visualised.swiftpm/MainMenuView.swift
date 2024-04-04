@@ -11,15 +11,29 @@ struct MainMenuView: View {
     var body: some View {
         NavigationStack{
                 List {
-                    NavigationLink{
-                        StackView()
-                    } label: {
-                        Text("Stack")
-                    }
-                    NavigationLink{
-                        DequeView()
-                    } label: {
-                        Text("Deque")
+                    Section {
+                        NavigationLink{
+                            StackView()
+                                .navigationBarTitle("Stack", displayMode: .inline)
+                        } label: {
+                            Text("Stack")
+                        }
+                        NavigationLink{
+                            DequeView()
+                                .navigationBarTitle("Deque", displayMode: .inline)
+                        } label: {
+                            Text("Deque")
+                        }
+                    } header: { Text("Linear data structures") }
+                    Section {
+                        NavigationLink{
+                            TreeView()
+                                .navigationBarTitle("Tree", displayMode: .inline)
+                        } label: {
+                            Text("Tree")
+                        }
+                    } header: {
+                        Text("Non-Linear data structures")
                     }
                 }
                 .navigationTitle("DS Visualised")

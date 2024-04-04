@@ -7,12 +7,10 @@
 
 import Foundation
 
-struct Node<Value> {
+struct Node<Value>: RandomAccessCollection,Identifiable {
+    var id = UUID()
     var value: Value
-    private(set) var children: [Node]
-    var count: Int {
-        1+children.reduce(0) { $0 + $1.count }
-    }
+    var children: [Node] = []
     
     init(_ value: Value) {
         self.value = value
@@ -23,15 +21,30 @@ struct Node<Value> {
         self.value = value
         self.children = children
     }
+    mutating func add(child: Node) {
+            children.append(child)
+        }
     
     init(_ value: Value, @NodeBuilder builder: () -> [Node]) {
         self.value = value
         self.children = builder()
     }
     
-    mutating func add(child: Node) {
-        children.append(child)
+    func index(after i: Int) -> Int {
+        return i + 1
     }
+    
+    var startIndex: Int { return 0 }
+    var endIndex: Int { return children.count }
+    
+    subscript(position: Int) -> Node {
+        return children[position]
+    }
+    
+    var count: Int {
+        1 + children.reduce(0) { $0 + $1.count }
+    }
+    
 }
 
 extension Node: Equatable where Value: Equatable { }
@@ -48,26 +61,18 @@ extension Node where Value: Equatable {
                 return match
             }
         }
-        
         return nil
     }
 }
 
+extension Node {
+  var depth: Int {
+    children.isEmpty ? 0 : 1 + children.first!.depth
+  }
+}
 @resultBuilder
 struct NodeBuilder {
     static func buildBlock<Value>(_ children: Node<Value> ...) -> [Node<Value>] {
         children
     }
 }
-//example tree
-let corvo = Node("corvo") {
-    Node("pelusa") {
-        Node("pelusita")
-        Node("negri")
-    }
-    Node("play") {
-        Node("GoW")
-        Node("Uncharted")
-    }
-}
-//print(corvo.count)
